@@ -1,3 +1,7 @@
+# Doing
+* Draw cards
+* Discard hands
+* Download assets
 # Time
 September 2021
 # MVP
