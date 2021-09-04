@@ -3,6 +3,8 @@ class_name Unit
 
 enum STATE {DEFAULT, HIGHLIGHTING, HOVERING}
 onready var m_iState: int = STATE.DEFAULT
+onready var m_bHighlightAllEnemies: bool = false
+onready var m_nUnits: Node2D = get_tree().get_nodes_in_group("Units")[0]
 
 var m_vTextureSize: Vector2
 
@@ -24,7 +26,8 @@ func _draw():
 		STATE.HOVERING:
 			draw_rect(Rect2(- m_vTextureSize * 0.6, m_vTextureSize * 1.2), Color.yellow, false)
 
-func set_highlight(_bIsHighlighting: bool):
+func set_highlight(_bIsHighlighting: bool, _bHighlightAllEnemies: bool = false):
+	m_bHighlightAllEnemies = _bHighlightAllEnemies
 	match m_iState:
 		STATE.DEFAULT:
 			if _bIsHighlighting:
@@ -34,9 +37,19 @@ func set_highlight(_bIsHighlighting: bool):
 				m_iState = STATE.DEFAULT
 
 func _on_mouse_entered():
-	if m_iState == STATE.HIGHLIGHTING:
-		m_iState = STATE.HOVERING
+	if m_bHighlightAllEnemies:
+		for nEnemy in m_nUnits.get_node("Enemies").get_children():
+			if nEnemy.m_iState == STATE.HIGHLIGHTING:
+				nEnemy.m_iState = STATE.HOVERING
+	else:
+		if m_iState == STATE.HIGHLIGHTING:
+			m_iState = STATE.HOVERING
 
 func _on_mouse_exited():
-	if m_iState == STATE.HOVERING:
-		m_iState = STATE.HIGHLIGHTING
+	if m_bHighlightAllEnemies:
+		for nEnemy in m_nUnits.get_node("Enemies").get_children():
+			if nEnemy.m_iState == STATE.HOVERING:
+				nEnemy.m_iState = STATE.HIGHLIGHTING
+	else:
+		if m_iState == STATE.HOVERING:
+			m_iState = STATE.HIGHLIGHTING

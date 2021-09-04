@@ -11,8 +11,10 @@ onready var m_bIsSelecting = false
 onready var m_nUnits: Node2D = get_tree().get_nodes_in_group("Units")[0]
 
 func _ready():
+	randomize()
 	$TextureRect.connect("mouse_entered", self, "_on_mouse_entered")
 	$TextureRect.connect("mouse_exited", self, "_on_mouse_exited")
+	print_debug(m_iTargetType)
 
 func _draw():
 	if m_bIsSelecting:
@@ -44,11 +46,10 @@ func _on_mouse_exited():
 		global_position.y += m_iHoverOffset
 
 func _highlight_possible_target(_bIsHighlighting: bool):
-	match m_iTargetType:
-		TARGET_TYPE.PLAYER:
-			var nPlayer: Unit = m_nUnits.get_node("Player")
-			nPlayer.set_highlight(_bIsHighlighting)
-		_:
-			var anEnemies = m_nUnits.get_node("Enemies").get_children()
-			for nEnemy in anEnemies:
-				nEnemy.set_highlight(_bIsHighlighting)
+	if m_iTargetType == TARGET_TYPE.PLAYER:
+		var nPlayer: Unit = m_nUnits.get_node("Player")
+		nPlayer.set_highlight(_bIsHighlighting)
+	else:
+		var anEnemies = m_nUnits.get_node("Enemies").get_children()
+		for nEnemy in anEnemies:
+			nEnemy.set_highlight(_bIsHighlighting, m_iTargetType == TARGET_TYPE.ENEMY_ALL)

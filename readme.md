@@ -1,8 +1,9 @@
 # Doing
-* Able to choose target for a card:
-    * ~~If a card require a single target, then highlight the target enemy on mouse hover.~~
-    * ~~Use godot's `_draw()` function: draw a line from the selected card to the mouse cursor.~~
-    * If a card target all enemies, the highlight all of them on mouse hover.
+* Download cards
+* Unit has HP and can be displayed
+* Basic card interaction:
+    * Attack cards
+    * Skill cards that provide block
 # Time
 September 2021
 # MVP
@@ -12,9 +13,11 @@ Able to fight with the enemy in a single combat.
     * Take about 20 or less normal cards (card with no status effect, buff or debuff).
 
 * Per Turn:
-    * Able to draw cards
-    * Able to discard cards
-    * Able to pick and choose target for a card (self, enemy single, enemy all)
+    * ~~Able to draw cards~~
+    * ~~Able to discard cards~~
+    * ~~Able to pick and choose target for a card (self, enemy single, enemy all)~~
+    * Attack cards that can damage unit's HP
+    * Skill cards that can provide block to negate damage from attack cards.
 * Per Combat:
     * Hooks:
         * Combat start
