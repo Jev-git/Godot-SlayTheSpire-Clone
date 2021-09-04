@@ -11,8 +11,8 @@ func _ready():
 func draw_cards():
 	for i in range(5):
 		var nCard: Node2D = m_psCard.instance()
-		nCard.position.x = i * (m_iCardWidth + m_iDistanceBetweenCard)
 		add_child(nCard)
+		nCard.position.x = i * (m_iCardWidth + m_iDistanceBetweenCard)
 
 func discard():
 	for nCard in get_children():

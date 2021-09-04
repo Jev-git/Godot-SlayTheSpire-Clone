@@ -1,7 +1,7 @@
 # Doing
 * Able to choose target for a card:
     * If a card require a single target, then highlight the target enemy on mouse hover.
-    * Use godot's `_draw()` function: draw a line from the selected card to the mouse cursor.
+    * ~~Use godot's `_draw()` function: draw a line from the selected card to the mouse cursor.~~
     * If the card target is on self, or all enemy, then just highlight the target(s).
 # Time
 September 2021
