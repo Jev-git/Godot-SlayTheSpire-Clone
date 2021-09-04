@@ -2,8 +2,6 @@ extends Node2D
 
 export var m_psCard: PackedScene
 export var m_iMaximumCards: int = 10
-export var m_iCardWidth: int = 64
-export var m_iDistanceBetweenCard: int = 10
 
 func _ready():
 	draw_cards()
@@ -12,7 +10,7 @@ func draw_cards():
 	for i in range(5):
 		var nCard: Node2D = m_psCard.instance()
 		add_child(nCard)
-		nCard.position.x = i * (m_iCardWidth + m_iDistanceBetweenCard)
+		nCard.position.x = i * nCard.m_vCardSize.x * 0.6
 
 func discard():
 	for nCard in get_children():

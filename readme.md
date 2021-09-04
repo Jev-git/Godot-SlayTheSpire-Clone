@@ -1,5 +1,5 @@
 # Doing
-* Download cards
+* ~~Download cards~~
 * Unit has HP and can be displayed
 * Basic card interaction:
     * Attack cards
@@ -8,9 +8,6 @@
 September 2021
 # MVP
 Able to fight with the enemy in a single combat.
-
-* Prep:
-    * Take about 20 or less normal cards (card with no status effect, buff or debuff).
 
 * Per Turn:
     * ~~Able to draw cards~~

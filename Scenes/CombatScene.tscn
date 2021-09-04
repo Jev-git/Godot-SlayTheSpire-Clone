@@ -8,7 +8,8 @@
 [node name="CombatScene" type="Node2D"]
 
 [node name="CardsInHand" type="Node2D" parent="."]
-position = Vector2( 128, 384 )
+position = Vector2( 0, 384 )
+scale = Vector2( 0.208085, 0.208085 )
 script = ExtResource( 3 )
 m_psCard = ExtResource( 4 )
 
