@@ -7,6 +7,7 @@ enum STATE {DEFAULT, HOVERING, SELECTING}
 onready var m_iState = STATE.DEFAULT
 onready var m_bIsSelecting = false
 onready var m_nUnits: Node2D = get_tree().get_nodes_in_group("Units")[0]
+onready var m_nCards: Node2D = get_tree().get_nodes_in_group("Cards")[0]
 onready var m_iHoverOffset: int = 10
 onready var m_vCardSize: Vector2 = $Sprite.get_texture().get_size()
 
@@ -26,17 +27,17 @@ func _process(delta):
 func _input(event):
 	if event is InputEventMouse:
 		if m_iState == STATE.HOVERING and event.is_pressed() and event.get_button_mask() == BUTTON_LEFT:
-			_change_state(STATE.SELECTING)
+			change_state(STATE.SELECTING)
 		elif m_iState == STATE.SELECTING and event.is_pressed() and event.get_button_mask() == BUTTON_RIGHT:
-			_change_state(STATE.DEFAULT)
+			change_state(STATE.DEFAULT)
 
 func _on_mouse_entered():
 	if m_iState == STATE.DEFAULT:
-		_change_state(STATE.HOVERING)
+		change_state(STATE.HOVERING)
 
 func _on_mouse_exited():
 	if m_iState == STATE.HOVERING:
-		_change_state(STATE.DEFAULT)
+		change_state(STATE.DEFAULT)
 
 func _highlight_possible_target(_bIsHighlighting: bool):
 	if m_iTargetType == TARGET_TYPE.PLAYER:
@@ -47,7 +48,7 @@ func _highlight_possible_target(_bIsHighlighting: bool):
 		for nEnemy in anEnemies:
 			nEnemy.set_highlight(_bIsHighlighting, m_iTargetType == TARGET_TYPE.ENEMY_ALL)
 
-func _change_state(_iNewState: int):
+func change_state(_iNewState: int):
 	match m_iState:
 		STATE.DEFAULT:
 			if _iNewState == STATE.HOVERING: # Mouse over the card
@@ -57,7 +58,13 @@ func _change_state(_iNewState: int):
 			if _iNewState == STATE.DEFAULT: # Mouse exit the card
 				global_position.y += m_iHoverOffset
 				z_index = 0
-			elif _iNewState == STATE.SELECTING: # Mouse over and select
+			elif _iNewState == STATE.SELECTING: # Select a card
+				# Deselect all other cards
+				for nCard in m_nCards.get_children():
+					if nCard.m_iState == STATE.SELECTING:
+						nCard.change_state(STATE.DEFAULT)
+						break
+				
 				m_bIsSelecting = true
 				_highlight_possible_target(true)
 		STATE.SELECTING:

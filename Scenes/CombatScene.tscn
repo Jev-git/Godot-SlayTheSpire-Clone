@@ -7,7 +7,9 @@
 
 [node name="CombatScene" type="Node2D"]
 
-[node name="CardsInHand" type="Node2D" parent="."]
+[node name="CardsInHand" type="Node2D" parent="." groups=[
+"Cards",
+]]
 position = Vector2( 0, 384 )
 scale = Vector2( 0.208085, 0.208085 )
 script = ExtResource( 3 )

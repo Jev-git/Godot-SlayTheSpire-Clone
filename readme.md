@@ -1,5 +1,6 @@
 # Doing
 * ~~Download cards~~
+* ~~Unhighlight a card when selecting another card.~~
 * Unit has HP and can be displayed
 * Basic card interaction:
     * Attack cards
