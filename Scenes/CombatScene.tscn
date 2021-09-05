@@ -40,16 +40,5 @@ position = Vector2( 128, 256 )
 [node name="Enemy1" parent="Units/Enemies" instance=ExtResource( 6 )]
 position = Vector2( 640, 256 )
 
-[node name="RichTextLabel" parent="Units/Enemies/Enemy1" index="1"]
-margin_right = 32.0
-text = "Enemy 1"
-
 [node name="Enemy2" parent="Units/Enemies" instance=ExtResource( 6 )]
 position = Vector2( 768, 256 )
-
-[node name="RichTextLabel" parent="Units/Enemies/Enemy2" index="1"]
-margin_right = 32.0
-text = "Enemy 2"
-
-[editable path="Units/Enemies/Enemy1"]
-[editable path="Units/Enemies/Enemy2"]

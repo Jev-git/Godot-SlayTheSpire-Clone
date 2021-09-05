@@ -6,6 +6,10 @@ onready var m_iState: int = STATE.DEFAULT
 onready var m_bHighlightAllEnemies: bool = false
 onready var m_nUnits: Node2D = get_tree().get_nodes_in_group("Units")[0]
 
+export var m_iMaxHP: int = 70
+onready var m_iCurrentHP: int
+onready var m_nHPLabel = $HPLabel
+
 var m_vTextureSize: Vector2
 
 func _ready():
@@ -15,6 +19,8 @@ func _ready():
 	
 	$TextureRect.connect("mouse_entered", self, "_on_mouse_entered")
 	$TextureRect.connect("mouse_exited", self, "_on_mouse_exited")
+	
+	set_hp(m_iMaxHP)
 
 func _process(delta):
 	update()
@@ -53,3 +59,14 @@ func _on_mouse_exited():
 	else:
 		if m_iState == STATE.HOVERING:
 			m_iState = STATE.HIGHLIGHTING
+
+func set_hp(_iHP: int):
+	m_iCurrentHP = _iHP
+	if m_iCurrentHP <= 0:
+		print_debug("DED!!1!")
+		m_nHPLabel.text = ""
+	else:
+		m_nHPLabel.text = "%s/%s" % [m_iCurrentHP, m_iMaxHP]
+
+func take_damage(_iDamage: int):
+	set_hp(m_iCurrentHP - _iDamage)
