@@ -1,7 +1,25 @@
 extends Node2D
+class_name Card
 
-enum TARGET_TYPE {PLAYER, ENEMY_SINGLE, ENEMY_ALL} # This will come from config file
-onready var m_iTargetType = randi() % TARGET_TYPE.size()
+enum TARGET_TYPE {PLAYER, ENEMY_SINGLE, ENEMY_ALL}
+enum CARD_TYPE {ATTACK, SKILL, POWER}
+var TARGET_TYPE_DICT = {
+	"SELF": TARGET_TYPE.PLAYER,
+	"ENEMY_SINGLE": TARGET_TYPE.ENEMY_SINGLE,
+	"ENEMY_ALL": TARGET_TYPE.ENEMY_ALL
+}
+var CARD_TYPE_DICT = {
+	"ATTACK": CARD_TYPE.ATTACK,
+	"SKILL": CARD_TYPE.SKILL,
+	"POWER": CARD_TYPE.POWER
+}
+
+# These values are read from a data file
+var m_iTargetType: int
+var m_iCardType: int
+var m_tTexture: Texture
+
+var m_sTextureDirPath: String = "res://Assets"
 
 enum STATE {DEFAULT, HOVERING, SELECTING}
 onready var m_iState = STATE.DEFAULT
@@ -9,14 +27,19 @@ onready var m_bIsSelecting = false
 onready var m_nUnits: Node2D = get_tree().get_nodes_in_group("Units")[0]
 onready var m_nCards: Node2D = get_tree().get_nodes_in_group("Cards")[0]
 onready var m_iHoverOffset: int = 10
-onready var m_vCardSize: Vector2 = $Sprite.get_texture().get_size()
+var m_vCardSize: Vector2
 
-func _ready():
-	randomize()
-	
+func init(_aData):
+	$TextureRect.texture = load("%s/%s.webp" % [m_sTextureDirPath, _aData[1]])
+	m_iCardType = CARD_TYPE_DICT[_aData[2]]
+	m_iTargetType = TARGET_TYPE_DICT[_aData[3]]
+	# 4: Param 1
+	# 5: Param 2
 	$TextureRect.connect("mouse_entered", self, "_on_mouse_entered")
 	$TextureRect.connect("mouse_exited", self, "_on_mouse_exited")
-	
+
+	m_vCardSize = $TextureRect.get_texture().get_size()
+
 func _draw():
 	if m_bIsSelecting:
 		draw_rect(Rect2(Vector2.ZERO, m_vCardSize), Color.green, false)

@@ -2,13 +2,18 @@ extends Node2D
 
 export var m_psCard: PackedScene
 export var m_iMaximumCards: int = 10
+export var m_sCardCSVPath: String
+var m_aCardData
+onready var m_cTest = preload("res://Scenes/Card.tscn")
 
 func _ready():
+	m_aCardData = _read_card_csv_file()
 	draw_cards()
 
 func draw_cards():
 	for i in range(5):
-		var nCard: Node2D = m_psCard.instance()
+		var nCard: Card = m_psCard.instance()
+		nCard.init(m_aCardData[randi() % m_aCardData.size()])
 		add_child(nCard)
 		nCard.position.x = i * nCard.m_vCardSize.x * 0.6
 
@@ -17,3 +22,15 @@ func discard():
 		nCard.queue_free()
 	yield(get_tree().create_timer(1.0), "timeout")
 	draw_cards()
+
+func _read_card_csv_file():
+	var aData = []
+	var oFile: File = File.new()
+	oFile.open(m_sCardCSVPath, oFile.READ)
+	oFile.get_csv_line() # Skip the first line
+	while !oFile.eof_reached():
+		var csv = oFile.get_csv_line()
+		if csv.size() > 0:
+			aData.append(csv)
+	oFile.close()
+	return aData

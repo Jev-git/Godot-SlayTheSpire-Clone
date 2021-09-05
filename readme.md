@@ -5,6 +5,7 @@
 * Basic card interaction:
     * Attack cards
     * Skill cards that provide block
+    * https://slay-the-spire.fandom.com/wiki/Ironclad_Cards
 # Time
 September 2021
 # MVP
@@ -16,6 +17,9 @@ Able to fight with the enemy in a single combat.
     * ~~Able to pick and choose target for a card (self, enemy single, enemy all)~~
     * Attack cards that can damage unit's HP
     * Skill cards that can provide block to negate damage from attack cards.
+    * Consistant deck:
+        * Discard pile
+        * Draw pile
 * Per Combat:
     * Hooks:
         * Combat start

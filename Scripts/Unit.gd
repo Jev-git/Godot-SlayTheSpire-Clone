@@ -10,13 +10,9 @@ export var m_iMaxHP: int = 70
 onready var m_iCurrentHP: int
 onready var m_nHPLabel = $HPLabel
 
-var m_vTextureSize: Vector2
+onready var m_vTextureSize: Vector2 = $TextureRect.get_texture().get_size()
 
 func _ready():
-	var vTextureSize: Vector2 = $Sprite.get_texture().get_size()
-	var vScale: Vector2 = $Sprite.get_scale()
-	m_vTextureSize = Vector2(vTextureSize.x * vScale.x, vTextureSize.y * vScale.y)
-	
 	$TextureRect.connect("mouse_entered", self, "_on_mouse_entered")
 	$TextureRect.connect("mouse_exited", self, "_on_mouse_exited")
 	
