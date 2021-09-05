@@ -18,3 +18,6 @@ export_presets.cfg
 
 # Build directory
 Build
+
+# Temp lock for excel files
+Data/.~lock.*
