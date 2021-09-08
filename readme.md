@@ -2,9 +2,13 @@
 * ~~Download cards~~
 * ~~Unhighlight a card when selecting another card.~~
 * ~~Unit has HP and can be displayed~~
+* Enemy attack in its turn
+* Simple feed back on taking damage
 * Basic card interaction:
     * ~~Attack cards~~
     * Skill cards that provide block
+        * Gain and display block amount
+        * Block negate damage before health
     * https://slay-the-spire.fandom.com/wiki/Ironclad_Cards
 # Time
 September 2021

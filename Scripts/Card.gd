@@ -28,6 +28,8 @@ enum STATE {DEFAULT, HOVERING, SELECTING}
 onready var m_iState = STATE.DEFAULT
 onready var m_bIsSelecting = false
 onready var m_nUnits: Node2D = get_tree().get_nodes_in_group("Units")[0]
+onready var m_nPlayer: Unit = m_nUnits.get_node("Player")
+onready var m_nEnemies: Node2D = m_nUnits.get_node("Enemies")
 onready var m_nCards: Node2D = get_tree().get_nodes_in_group("Cards")[0]
 onready var m_iHoverOffset: int = 10
 var m_vCardSize: Vector2
@@ -103,12 +105,15 @@ func change_state(_iNewState: int):
 	m_iState = _iNewState
 
 func on_unit_selected(_nUnit: Node2D):
-	if m_iCardType == CARD_TYPE.ATTACK:
-		if m_iTargetType == TARGET_TYPE.ENEMY_SINGLE:
-			_nUnit.take_damage(m_aiParams[0])
-		else:
-			for nEnemy in m_nUnits.get_node("Enemies").get_children():
-				nEnemy.take_damage(m_aiParams[0])
-		# TODO: Gain block with m_aiParams[1]
+	match m_iCardType:
+		CARD_TYPE.ATTACK:
+			if m_iTargetType == TARGET_TYPE.ENEMY_SINGLE:
+				_nUnit.take_damage(m_aiParams[0])
+			else:
+				for nEnemy in m_nEnemies.get_children():
+					nEnemy.take_damage(m_aiParams[0])
+			m_nPlayer.gain_block(m_aiParams[1])
+		CARD_TYPE.SKILL:
+			m_nPlayer.gain_block(m_aiParams[0])
 	get_parent().set_selected_card(null)
 	queue_free()

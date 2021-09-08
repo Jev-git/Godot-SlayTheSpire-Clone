@@ -15,6 +15,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="BlockLabel" type="RichTextLabel" parent="."]
+margin_top = 64.0
+margin_right = 40.0
+margin_bottom = 104.0
+custom_colors/default_color = Color( 0, 0.811765, 1, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="TextureRect" type="TextureRect" parent="."]
 margin_left = -32.0
 margin_top = -32.0

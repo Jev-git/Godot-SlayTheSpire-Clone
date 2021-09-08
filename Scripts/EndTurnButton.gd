@@ -11,6 +11,9 @@ func _ready():
 func _on_button_pressed():
 	m_nCardsInHand.discard()
 	m_nCardsInHand.set_selected_card(null)
+	
 	m_nPlayer.set_highlight(false)
+	m_nPlayer.set_block(0)
+	
 	for nEnemy in m_nEnemies.get_children():
 		nEnemy.set_highlight(false)

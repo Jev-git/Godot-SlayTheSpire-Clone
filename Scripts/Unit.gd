@@ -9,7 +9,9 @@ onready var m_nCardsInHand: Node2D = get_tree().get_nodes_in_group("Cards")[0]
 
 export var m_iMaxHP: int = 70
 onready var m_iCurrentHP: int
+onready var m_iBlock: int = 0
 onready var m_nHPLabel = $HPLabel
+onready var m_nBlockLabel = $BlockLabel
 
 onready var m_vTextureSize: Vector2 = $TextureRect.get_texture().get_size()
 
@@ -71,4 +73,22 @@ func set_hp(_iHP: int):
 		m_nHPLabel.text = "%s/%s" % [m_iCurrentHP, m_iMaxHP]
 
 func take_damage(_iDamage: int):
-	set_hp(m_iCurrentHP - _iDamage)
+	var iDamageToHP: int = 0
+	if m_iBlock > 0:
+		if _iDamage > m_iBlock:
+			iDamageToHP = _iDamage - m_iBlock
+		set_block(m_iBlock - _iDamage)
+	else:
+		iDamageToHP = _iDamage
+	set_hp(m_iCurrentHP - iDamageToHP)
+
+func gain_block(_iBlock: int):
+	set_block(m_iBlock + _iBlock)
+
+func set_block(_iBlock: int):
+	if _iBlock <= 0:
+		m_iBlock = 0
+		m_nBlockLabel.text = ""
+	else:
+		m_iBlock = _iBlock
+		m_nBlockLabel.text = String(m_iBlock)
