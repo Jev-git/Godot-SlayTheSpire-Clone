@@ -4,7 +4,7 @@ export var m_psCard: PackedScene
 export var m_iMaximumCards: int = 10
 export var m_sCardCSVPath: String
 var m_aCardData
-onready var m_cTest = preload("res://Scenes/Card.tscn")
+var m_oSelectedCard: Card
 
 func _ready():
 	m_aCardData = _read_card_csv_file()
@@ -34,3 +34,10 @@ func _read_card_csv_file():
 			aData.append(csv)
 	oFile.close()
 	return aData
+
+func set_selected_card(_oCard: Card):
+	m_oSelectedCard = _oCard
+
+func on_unit_selected(_nUnit: Node2D):
+	if m_oSelectedCard:
+		m_oSelectedCard.on_unit_selected((_nUnit))

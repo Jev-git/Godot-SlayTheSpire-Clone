@@ -19,6 +19,9 @@ var m_iTargetType: int
 var m_iCardType: int
 var m_tTexture: Texture
 
+# Card params
+var m_aiParams = []
+
 var m_sTextureDirPath: String = "res://Assets"
 
 enum STATE {DEFAULT, HOVERING, SELECTING}
@@ -33,8 +36,8 @@ func init(_aData):
 	$TextureRect.texture = load("%s/%s.webp" % [m_sTextureDirPath, _aData[1]])
 	m_iCardType = CARD_TYPE_DICT[_aData[2]]
 	m_iTargetType = TARGET_TYPE_DICT[_aData[3]]
-	# 4: Param 1
-	# 5: Param 2
+	m_aiParams.append(int(_aData[4]))
+	m_aiParams.append(int(_aData[5]))
 	$TextureRect.connect("mouse_entered", self, "_on_mouse_entered")
 	$TextureRect.connect("mouse_exited", self, "_on_mouse_exited")
 
@@ -88,6 +91,7 @@ func change_state(_iNewState: int):
 						nCard.change_state(STATE.DEFAULT)
 						break
 				
+				get_parent().set_selected_card(self)
 				m_bIsSelecting = true
 				_highlight_possible_target(true)
 		STATE.SELECTING:
@@ -97,3 +101,14 @@ func change_state(_iNewState: int):
 				_highlight_possible_target(false)
 				global_position.y += m_iHoverOffset
 	m_iState = _iNewState
+
+func on_unit_selected(_nUnit: Node2D):
+	if m_iCardType == CARD_TYPE.ATTACK:
+		if m_iTargetType == TARGET_TYPE.ENEMY_SINGLE:
+			_nUnit.take_damage(m_aiParams[0])
+		else:
+			for nEnemy in m_nUnits.get_node("Enemies").get_children():
+				nEnemy.take_damage(m_aiParams[0])
+		# TODO: Gain block with m_aiParams[1]
+	get_parent().set_selected_card(null)
+	queue_free()

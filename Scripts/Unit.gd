@@ -5,6 +5,7 @@ enum STATE {DEFAULT, HIGHLIGHTING, HOVERING}
 onready var m_iState: int = STATE.DEFAULT
 onready var m_bHighlightAllEnemies: bool = false
 onready var m_nUnits: Node2D = get_tree().get_nodes_in_group("Units")[0]
+onready var m_nCardsInHand: Node2D = get_tree().get_nodes_in_group("Cards")[0]
 
 export var m_iMaxHP: int = 70
 onready var m_iCurrentHP: int
@@ -27,6 +28,11 @@ func _draw():
 			draw_rect(Rect2(- m_vTextureSize * 0.6, m_vTextureSize * 1.2), Color.green, false)
 		STATE.HOVERING:
 			draw_rect(Rect2(- m_vTextureSize * 0.6, m_vTextureSize * 1.2), Color.yellow, false)
+
+func _input(event):
+	if event is InputEventMouse:
+		if m_iState == STATE.HOVERING and event.is_pressed() and event.get_button_mask() == BUTTON_LEFT:
+			m_nCardsInHand.on_unit_selected(self)
 
 func set_highlight(_bIsHighlighting: bool, _bHighlightAllEnemies: bool = false):
 	m_bHighlightAllEnemies = _bHighlightAllEnemies
