@@ -8,7 +8,6 @@ var m_oSelectedCard: Card
 
 func _ready():
 	m_aCardData = _read_card_csv_file()
-	draw_cards()
 
 func draw_cards():
 	for i in range(5):
@@ -20,8 +19,6 @@ func draw_cards():
 func discard():
 	for nCard in get_children():
 		nCard.queue_free()
-	yield(get_tree().create_timer(1.0), "timeout")
-	draw_cards()
 
 func _read_card_csv_file():
 	var aData = []

@@ -2,13 +2,13 @@
 * ~~Download cards~~
 * ~~Unhighlight a card when selecting another card.~~
 * ~~Unit has HP and can be displayed~~
-* Enemy attack in its turn
+* ~~Enemy attack in its turn~~
 * Simple feed back on taking damage
-* Basic card interaction:
+* ~~Basic card interaction:~~
     * ~~Attack cards~~
-    * Skill cards that provide block
-        * Gain and display block amount
-        * Block negate damage before health
+    * ~~Skill cards that provide block~~
+        * ~~Gain and display block amount~~
+        * ~~Block negate damage before health~~
     * https://slay-the-spire.fandom.com/wiki/Ironclad_Cards
 # Time
 September 2021
@@ -20,10 +20,11 @@ Able to fight with the enemy in a single combat.
     * ~~Able to discard cards~~
     * ~~Able to pick and choose target for a card (self, enemy single, enemy all)~~
     * ~~Attack cards that can damage unit's HP~~
-    * Skill cards that can provide block to negate damage from attack cards.
+    * ~~Skill cards that can provide block to negate damage from attack cards.~~
     * Consistant deck:
         * Discard pile
         * Draw pile
+    * Energy
 * Per Combat:
     * Hooks:
         * Combat start

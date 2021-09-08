@@ -5,6 +5,8 @@ enum STATE {DEFAULT, HIGHLIGHTING, HOVERING}
 onready var m_iState: int = STATE.DEFAULT
 onready var m_bHighlightAllEnemies: bool = false
 onready var m_nUnits: Node2D = get_tree().get_nodes_in_group("Units")[0]
+onready var m_nPlayer: Unit = m_nUnits.get_node("Player")
+onready var m_nEnemies: Node2D = m_nUnits.get_node("Enemies")
 onready var m_nCardsInHand: Node2D = get_tree().get_nodes_in_group("Cards")[0]
 
 export var m_iMaxHP: int = 70
@@ -48,7 +50,7 @@ func set_highlight(_bIsHighlighting: bool, _bHighlightAllEnemies: bool = false):
 
 func _on_mouse_entered():
 	if m_bHighlightAllEnemies:
-		for nEnemy in m_nUnits.get_node("Enemies").get_children():
+		for nEnemy in m_nEnemies.get_children():
 			if nEnemy.m_iState == STATE.HIGHLIGHTING:
 				nEnemy.m_iState = STATE.HOVERING
 	else:
@@ -57,7 +59,7 @@ func _on_mouse_entered():
 
 func _on_mouse_exited():
 	if m_bHighlightAllEnemies:
-		for nEnemy in m_nUnits.get_node("Enemies").get_children():
+		for nEnemy in m_nEnemies.get_children():
 			if nEnemy.m_iState == STATE.HOVERING:
 				nEnemy.m_iState = STATE.HIGHLIGHTING
 	else:

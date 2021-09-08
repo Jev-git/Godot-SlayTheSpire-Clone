@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
+[ext_resource path="res://Scripts/Enemy.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/EndTurnButton.gd" type="Script" id=2]
 [ext_resource path="res://Scripts/CardsInHand.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/Card.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scripts/TurnManager.gd" type="Script" id=5]
 [ext_resource path="res://Scenes/Unit.tscn" type="PackedScene" id=6]
 
 [node name="CombatScene" type="Node2D"]
@@ -40,6 +42,13 @@ position = Vector2( 128, 256 )
 
 [node name="Enemy1" parent="Units/Enemies" instance=ExtResource( 6 )]
 position = Vector2( 640, 256 )
+script = ExtResource( 1 )
 
 [node name="Enemy2" parent="Units/Enemies" instance=ExtResource( 6 )]
 position = Vector2( 768, 256 )
+script = ExtResource( 1 )
+
+[node name="TurnManager" type="Node2D" parent="." groups=[
+"TurnManager",
+]]
+script = ExtResource( 5 )
