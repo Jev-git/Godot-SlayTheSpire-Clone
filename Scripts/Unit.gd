@@ -15,6 +15,9 @@ onready var m_iBlock: int = 0
 onready var m_nHPLabel = $HPLabel
 onready var m_nBlockLabel = $BlockLabel
 
+onready var m_vPositionOffset = Vector2.ZERO
+onready var m_nAnimPlayer = $AnimationPlayer
+
 onready var m_vTextureSize: Vector2 = $TextureRect.get_texture().get_size()
 
 func _ready():
@@ -82,6 +85,7 @@ func take_damage(_iDamage: int):
 		set_block(m_iBlock - _iDamage)
 	else:
 		iDamageToHP = _iDamage
+		m_nAnimPlayer.play("Shake")
 	set_hp(m_iCurrentHP - iDamageToHP)
 
 func gain_block(_iBlock: int):

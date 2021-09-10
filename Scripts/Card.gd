@@ -115,5 +115,6 @@ func on_unit_selected(_nUnit: Node2D):
 			m_nPlayer.gain_block(m_aiParams[1])
 		CARD_TYPE.SKILL:
 			m_nPlayer.gain_block(m_aiParams[0])
+	_highlight_possible_target(false)
 	get_parent().set_selected_card(null)
 	queue_free()

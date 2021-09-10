@@ -10,12 +10,10 @@ func _ready():
 	start_player_turn()
 
 func start_player_turn():
-	print_debug("~")
 	m_nPlayer.set_block(0)
 	m_nCards.draw_cards()
 
 func end_player_turn():
-	print_debug("~")
 	m_nCards.discard()
 	m_nCards.set_selected_card(null)
 	
@@ -26,9 +24,7 @@ func end_player_turn():
 	start_enemies_turn()
 
 func start_enemies_turn():
-	print_debug("~")
 	m_nEnemies.get_child(0).start_turn()
 
 func end_enemies_turn():
-	print_debug("~")
 	start_player_turn()

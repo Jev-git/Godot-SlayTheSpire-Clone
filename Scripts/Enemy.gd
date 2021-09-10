@@ -5,8 +5,10 @@ onready var m_nTurnManager: TurnManager = get_tree().get_nodes_in_group("TurnMan
 export var m_iDamage: int = 7
 
 func start_turn():
+	m_nAnimPlayer.play("Enemy Attack")
+	yield(m_nAnimPlayer, "animation_finished")
 	m_nPlayer.take_damage(m_iDamage)
-	print_debug("%s deals %s damages to player" % [get_name(), m_iDamage])
+	yield(get_tree().create_timer(0.5), "timeout")
 	var m_nNextEnemy: Enemy = get_next_enemy()
 	if m_nNextEnemy:
 		m_nNextEnemy.start_turn()

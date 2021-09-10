@@ -3,7 +3,7 @@
 * ~~Unhighlight a card when selecting another card.~~
 * ~~Unit has HP and can be displayed~~
 * ~~Enemy attack in its turn~~
-* Simple feed back on taking damage
+* ~~Simple feed back on taking damage~~
 * ~~Basic card interaction:~~
     * ~~Attack cards~~
     * ~~Skill cards that provide block~~
