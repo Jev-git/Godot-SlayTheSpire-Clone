@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scripts/DamageBubble.gd" type="Script" id=1]
+
+[node name="DamageBubble" type="Node2D"]
+z_index = 10
+script = ExtResource( 1 )
+
+[node name="HPDamageText" type="RichTextLabel" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+custom_colors/default_color = Color( 1, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BlockDamageText" type="RichTextLabel" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+custom_colors/default_color = Color( 0, 0.505882, 1, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+autostart = true

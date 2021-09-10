@@ -18,6 +18,8 @@ onready var m_nBlockLabel = $BlockLabel
 onready var m_vPositionOffset = Vector2.ZERO
 onready var m_nAnimPlayer = $AnimationPlayer
 
+export var m_psDamageBubble: PackedScene
+
 onready var m_vTextureSize: Vector2 = $TextureRect.get_texture().get_size()
 
 func _ready():
@@ -78,15 +80,23 @@ func set_hp(_iHP: int):
 		m_nHPLabel.text = "%s/%s" % [m_iCurrentHP, m_iMaxHP]
 
 func take_damage(_iDamage: int):
-	var iDamageToHP: int = 0
+	var iDamageToHP: int = _iDamage
+	
 	if m_iBlock > 0:
 		if _iDamage > m_iBlock:
 			iDamageToHP = _iDamage - m_iBlock
-		set_block(m_iBlock - _iDamage)
-	else:
-		iDamageToHP = _iDamage
+			_create_damage_bubble(m_iBlock, false)
+			set_block(0)
+		else:
+			iDamageToHP = 0
+			_create_damage_bubble(_iDamage, false)
+			set_block(m_iBlock - _iDamage)
+	
+	if iDamageToHP > 0:
 		m_nAnimPlayer.play("Shake")
-	set_hp(m_iCurrentHP - iDamageToHP)
+		set_hp(m_iCurrentHP - iDamageToHP)
+		yield(get_tree().create_timer(0.1), "timeout")
+		_create_damage_bubble(iDamageToHP, true)
 
 func gain_block(_iBlock: int):
 	set_block(m_iBlock + _iBlock)
@@ -98,3 +108,8 @@ func set_block(_iBlock: int):
 	else:
 		m_iBlock = _iBlock
 		m_nBlockLabel.text = String(m_iBlock)
+
+func _create_damage_bubble(_iDamage: int, _bIsHPDamage: bool):
+	var nDamageBubble = m_psDamageBubble.instance()
+	nDamageBubble.init(_iDamage, _bIsHPDamage)
+	$DamageBubble.add_child(nDamageBubble)

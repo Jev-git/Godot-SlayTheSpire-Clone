@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scripts/Unit.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/DamageBubble.tscn" type="PackedScene" id=3]
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=1]
 resource_name = "Enemy Attack"
 length = 0.3
 step = 0.05
@@ -20,8 +21,7 @@ tracks/0/keys = {
 "values": [ Vector2( -32, -32 ), Vector2( 0, -32 ), Vector2( -32, -32 ) ]
 }
 
-[sub_resource type="Animation" id=1]
-resource_name = "Shake"
+[sub_resource type="Animation" id=2]
 length = 0.2
 step = 0.05
 tracks/0/type = "value"
@@ -39,6 +39,7 @@ tracks/0/keys = {
 
 [node name="Unit" type="Node2D"]
 script = ExtResource( 1 )
+m_psDamageBubble = ExtResource( 3 )
 
 [node name="HPLabel" type="RichTextLabel" parent="."]
 margin_left = -24.0
@@ -69,5 +70,8 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-"anims/Enemy Attack" = SubResource( 2 )
-anims/Shake = SubResource( 1 )
+"anims/Enemy Attack" = SubResource( 1 )
+anims/Shake = SubResource( 2 )
+
+[node name="DamageBubble" type="Position2D" parent="."]
+position = Vector2( 32, 32 )
