@@ -19,13 +19,11 @@ func draw_cards(_iAmount: int):
 		iCardsToDraw = m_aiDrawPile.size()
 		iExtraCardsToDraw = _iAmount - m_aiDrawPile.size()
 		
-	for i in range(iCardsToDraw):
+	for i in range(get_child_count(), get_child_count() + iCardsToDraw):
 		var nCard: Card = m_psCard.instance()
 		nCard.init(m_nCardUtil.get_card_data_with_id(m_aiDrawPile.pop_front()))
 		add_child(nCard)
 		nCard.position.x = i * nCard.m_vCardSize.x * 0.6
-	
-	print("%s, %s" % [iCardsToDraw, iExtraCardsToDraw])
 	
 	if iExtraCardsToDraw > 0:
 		move_discard_pile_to_draw_pile()
