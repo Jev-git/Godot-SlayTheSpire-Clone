@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scripts/Enemy.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/EndTurnButton.gd" type="Script" id=2]
@@ -6,8 +6,16 @@
 [ext_resource path="res://Scenes/Card.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scripts/TurnManager.gd" type="Script" id=5]
 [ext_resource path="res://Scenes/Unit.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scripts/CardUtil.gd" type="Script" id=7]
+[ext_resource path="res://Scripts/ViewDrawPileButton.gd" type="Script" id=8]
+[ext_resource path="res://Scripts/ViewDiscardPileButton.gd" type="Script" id=9]
 
 [node name="CombatScene" type="Node2D"]
+
+[node name="CardUtil" type="Node2D" parent="." groups=[
+"CardUtil",
+]]
+script = ExtResource( 7 )
 
 [node name="CardsInHand" type="Node2D" parent="." groups=[
 "Cards",
@@ -16,7 +24,6 @@ position = Vector2( 0, 384 )
 scale = Vector2( 0.208085, 0.208085 )
 script = ExtResource( 3 )
 m_psCard = ExtResource( 4 )
-m_sCardCSVPath = "res://Data/CardData.csv"
 
 [node name="EndTurnButton" type="Node2D" parent="."]
 position = Vector2( 880, 416 )
@@ -52,3 +59,25 @@ script = ExtResource( 1 )
 "TurnManager",
 ]]
 script = ExtResource( 5 )
+
+[node name="ViewDrawPileButton" type="Button" parent="."]
+margin_left = 808.0
+margin_top = 464.0
+margin_right = 914.0
+margin_bottom = 484.0
+text = "View Draw Pile"
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ViewDiscardPileButton" type="Button" parent="."]
+margin_left = 808.0
+margin_top = 496.0
+margin_right = 930.0
+margin_bottom = 516.0
+text = "View Discard Pile"
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

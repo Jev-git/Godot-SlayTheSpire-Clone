@@ -11,10 +11,10 @@ func _ready():
 
 func start_player_turn():
 	m_nPlayer.set_block(0)
-	m_nCards.draw_cards()
+	m_nCards.draw_cards(5)
 
 func end_player_turn():
-	m_nCards.discard()
+	m_nCards.discard_hand()
 	m_nCards.set_selected_card(null)
 	
 	m_nPlayer.set_highlight(false)

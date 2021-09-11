@@ -14,12 +14,12 @@ var CARD_TYPE_DICT = {
 	"POWER": CARD_TYPE.POWER
 }
 
-# These values are read from a data file
-var m_iTargetType: int
-var m_iCardType: int
-var m_tTexture: Texture
-
 # Card params
+onready var m_iID: int
+var m_tTexture: Texture
+var m_iCardType: int
+var m_iTargetType: int
+var m_iEnergyCost: int
 var m_aiParams = []
 
 var m_sTextureDirPath: String = "res://Assets"
@@ -34,12 +34,14 @@ onready var m_nCards: Node2D = get_tree().get_nodes_in_group("Cards")[0]
 onready var m_iHoverOffset: int = 10
 var m_vCardSize: Vector2
 
-func init(_aData):
-	$TextureRect.texture = load("%s/%s.webp" % [m_sTextureDirPath, _aData[1]])
-	m_iCardType = CARD_TYPE_DICT[_aData[2]]
-	m_iTargetType = TARGET_TYPE_DICT[_aData[3]]
-	m_aiParams.append(int(_aData[4]))
-	m_aiParams.append(int(_aData[5]))
+func init(_aCardData: Array):
+	m_iID = int(_aCardData.pop_front())
+	$TextureRect.texture = load("%s/%s.webp" % [m_sTextureDirPath, _aCardData.pop_front()])
+	m_iCardType = CARD_TYPE_DICT[_aCardData.pop_front()]
+	m_iTargetType = TARGET_TYPE_DICT[_aCardData.pop_front()]
+	m_iEnergyCost = int(_aCardData.pop_front())
+	m_aiParams.append(int(_aCardData.pop_front()))
+	m_aiParams.append(int(_aCardData.pop_front()))
 	$TextureRect.connect("mouse_entered", self, "_on_mouse_entered")
 	$TextureRect.connect("mouse_exited", self, "_on_mouse_exited")
 
@@ -115,6 +117,7 @@ func on_unit_selected(_nUnit: Node2D):
 			m_nPlayer.gain_block(m_aiParams[1])
 		CARD_TYPE.SKILL:
 			m_nPlayer.gain_block(m_aiParams[0])
-	_highlight_possible_target(false)
+	get_parent().send_used_card_to_discard_pile(m_iID)
 	get_parent().set_selected_card(null)
+	_highlight_possible_target(false)
 	queue_free()
