@@ -29,22 +29,22 @@ m_psCard = ExtResource( 4 )
 [node name="Units" type="Node2D" parent="." groups=[
 "Units",
 ]]
+position = Vector2( 0, 192 )
 
 [node name="Player" parent="Units" instance=ExtResource( 6 )]
-position = Vector2( 128, 256 )
-m_iMaxHP = 30
+position = Vector2( 128, 0 )
 
 [node name="Enemies" type="Node2D" parent="Units"]
+position = Vector2( 704, 0 )
 
 [node name="Enemy1" parent="Units/Enemies" instance=ExtResource( 6 )]
-position = Vector2( 640, 256 )
 script = ExtResource( 1 )
-m_iMaxHP = 12
+m_iMaxHP = 30
 
 [node name="Enemy2" parent="Units/Enemies" instance=ExtResource( 6 )]
-position = Vector2( 768, 256 )
+position = Vector2( 128, 0 )
 script = ExtResource( 1 )
-m_iMaxHP = 12
+m_iMaxHP = 30
 
 [node name="TurnManager" type="Node2D" parent="." groups=[
 "TurnManager",

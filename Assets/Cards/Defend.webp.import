@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Defend.webp-1dd453487bce9fd44f0048dc3a86fb69.stex"
+path="res://.import/Defend.webp-a09bf877956422ffa50612b0151a5b92.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Defend.webp"
-dest_files=[ "res://.import/Defend.webp-1dd453487bce9fd44f0048dc3a86fb69.stex" ]
+source_file="res://Assets/Cards/Defend.webp"
+dest_files=[ "res://.import/Defend.webp-a09bf877956422ffa50612b0151a5b92.stex" ]
 
 [params]
 

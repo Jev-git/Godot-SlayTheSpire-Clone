@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Cleave.webp-592ba1eb1c5975ad0c8a2641c36ebb62.stex"
+path="res://.import/Vulnerable.webp-e95753dde75add6c566d8e8e3c4c6564.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Cleave.webp"
-dest_files=[ "res://.import/Cleave.webp-592ba1eb1c5975ad0c8a2641c36ebb62.stex" ]
+source_file="res://Assets/Effects/Vulnerable.webp"
+dest_files=[ "res://.import/Vulnerable.webp-e95753dde75add6c566d8e8e3c4c6564.stex" ]
 
 [params]
 

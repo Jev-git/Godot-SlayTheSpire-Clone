@@ -1,6 +1,13 @@
 # Doing
-* ~~Win condition: when all enemies are defeated~~
-* ~~Lose condition: when player HP reaches 0~~
+* Buff/Debuff that get reduced by 1 each turn
+    * Get new cards
+        * Vulnerable debuff
+            * ~~Apply debuff~~
+            * Debuff duration get reduced after each turn
+            * Debuff amplify damage received
+* Buff/Debuff that resist through out a combat
+# Card source (wiki)
+https://slay-the-spire.fandom.com/wiki/Ironclad_Cards
 # Time
 September 2021
 # MVP (done)

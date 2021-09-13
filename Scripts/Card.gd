@@ -23,7 +23,7 @@ var m_iEnergyCost: int
 var m_aiParams = []
 
 export var m_psTextBubble: PackedScene
-var m_sTextureDirPath: String = "res://Assets"
+var m_sTextureDirPath: String = "res://Assets/Cards"
 
 onready var m_nUnits: Node2D = get_tree().get_nodes_in_group("Units")[0]
 onready var m_nPlayer: Unit = m_nUnits.get_node("Player")
@@ -43,8 +43,9 @@ func init(_aCardData: Array):
 	m_iCardType = CARD_TYPE_DICT[_aCardData.pop_front()]
 	m_iTargetType = TARGET_TYPE_DICT[_aCardData.pop_front()]
 	m_iEnergyCost = int(_aCardData.pop_front())
-	m_aiParams.append(int(_aCardData.pop_front()))
-	m_aiParams.append(int(_aCardData.pop_front()))
+	while(_aCardData.size() > 0):
+		m_aiParams.append(int(_aCardData.pop_front()))
+	
 	$TextureRect.connect("mouse_entered", self, "_on_mouse_entered")
 	$TextureRect.connect("mouse_exited", self, "_on_mouse_exited")
 
@@ -124,6 +125,7 @@ func on_unit_selected(_nUnit: Node2D):
 				for nEnemy in m_nEnemies.get_children():
 					nEnemy.take_damage(m_aiParams[0])
 			m_nPlayer.gain_block(m_aiParams[1])
+			_nUnit.apply_vulnerable(m_aiParams[2])
 		CARD_TYPE.SKILL:
 			m_nPlayer.gain_block(m_aiParams[0])
 	get_parent().send_used_card_to_discard_pile(m_iID)

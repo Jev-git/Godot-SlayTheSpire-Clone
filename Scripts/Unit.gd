@@ -22,6 +22,9 @@ export var m_psTextBubble: PackedScene
 
 onready var m_vTextureSize: Vector2 = $TextureRect.get_texture().get_size()
 
+onready var m_nEffects: Node2D = $Effects
+export var m_psVulnerableFX: PackedScene
+
 signal die(_nSelf)
 
 func _ready():
@@ -115,3 +118,15 @@ func _create_damage_bubble(_iDamage: int, _bIsHPDamage: bool):
 	var nTextBubble: TextBubble = m_psTextBubble.instance()
 	nTextBubble.display_damage(_iDamage, _bIsHPDamage)
 	$DamageBubble.add_child(nTextBubble)
+
+func apply_vulnerable(_iDuration: int):
+	if _iDuration == 0:
+		return
+	if m_nEffects.get_child_count() == 0:
+		var m_nVulnerableFX = m_psVulnerableFX.instance()
+		m_nVulnerableFX.init(_iDuration)
+		m_nEffects.add_child(m_nVulnerableFX)
+		print("called")
+	else:
+		var m_nVulnerableFX = m_nEffects.get_child(0)
+		m_nVulnerableFX.increase_duration(_iDuration)

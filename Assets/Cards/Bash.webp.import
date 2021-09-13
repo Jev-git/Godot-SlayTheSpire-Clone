@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Strike.webp-2e91b8faaed100191ae14d4c9b9d1f3f.stex"
+path="res://.import/Bash.webp-9b23f15f0b97ab00d5ecba2c900fb4b2.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Strike.webp"
-dest_files=[ "res://.import/Strike.webp-2e91b8faaed100191ae14d4c9b9d1f3f.stex" ]
+source_file="res://Assets/Cards/Bash.webp"
+dest_files=[ "res://.import/Bash.webp-9b23f15f0b97ab00d5ecba2c900fb4b2.stex" ]
 
 [params]
 
