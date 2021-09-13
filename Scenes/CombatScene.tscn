@@ -1,7 +1,6 @@
 [gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scripts/Enemy.gd" type="Script" id=1]
-[ext_resource path="res://Scripts/EndTurnButton.gd" type="Script" id=2]
 [ext_resource path="res://Scripts/CardsInHand.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/Card.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scripts/TurnManager.gd" type="Script" id=5]
@@ -10,6 +9,7 @@
 [ext_resource path="res://Scripts/ViewDrawPileButton.gd" type="Script" id=8]
 [ext_resource path="res://Scripts/ViewDiscardPileButton.gd" type="Script" id=9]
 [ext_resource path="res://Scripts/Energy.gd" type="Script" id=10]
+[ext_resource path="res://Scripts/CombatEndPopup.gd" type="Script" id=11]
 
 [node name="CombatScene" type="Node2D"]
 
@@ -26,42 +26,47 @@ scale = Vector2( 0.208085, 0.208085 )
 script = ExtResource( 3 )
 m_psCard = ExtResource( 4 )
 
-[node name="EndTurnButton" type="Node2D" parent="."]
-position = Vector2( 880, 416 )
-script = ExtResource( 2 )
-
-[node name="Button" type="Button" parent="EndTurnButton"]
-margin_left = -16.0
-margin_right = 51.0
-margin_bottom = 20.0
-text = "End Turn"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="Units" type="Node2D" parent="." groups=[
 "Units",
 ]]
 
 [node name="Player" parent="Units" instance=ExtResource( 6 )]
 position = Vector2( 128, 256 )
+m_iMaxHP = 30
 
 [node name="Enemies" type="Node2D" parent="Units"]
 
 [node name="Enemy1" parent="Units/Enemies" instance=ExtResource( 6 )]
 position = Vector2( 640, 256 )
 script = ExtResource( 1 )
+m_iMaxHP = 12
 
 [node name="Enemy2" parent="Units/Enemies" instance=ExtResource( 6 )]
 position = Vector2( 768, 256 )
 script = ExtResource( 1 )
+m_iMaxHP = 12
 
 [node name="TurnManager" type="Node2D" parent="." groups=[
 "TurnManager",
 ]]
 script = ExtResource( 5 )
 
-[node name="ViewDrawPileButton" type="Button" parent="."]
+[node name="EndTurnButton" type="Button" parent="." groups=[
+"EndTurnButton",
+"UIButtons",
+]]
+margin_left = 864.0
+margin_top = 416.0
+margin_right = 931.0
+margin_bottom = 436.0
+text = "End Turn"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ViewDrawPileButton" type="Button" parent="." groups=[
+"UIButtons",
+]]
 margin_left = 808.0
 margin_top = 464.0
 margin_right = 914.0
@@ -72,7 +77,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ViewDiscardPileButton" type="Button" parent="."]
+[node name="ViewDiscardPileButton" type="Button" parent="." groups=[
+"UIButtons",
+]]
 margin_left = 808.0
 margin_top = 496.0
 margin_right = 930.0
@@ -99,3 +106,13 @@ valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="CombatEndPopup" type="Node2D" parent="."]
+pause_mode = 2
+script = ExtResource( 11 )
+
+[node name="AcceptDialog" type="AcceptDialog" parent="CombatEndPopup"]
+margin_right = 83.0
+margin_bottom = 58.0
+window_title = ""
+dialog_text = "Replay?"

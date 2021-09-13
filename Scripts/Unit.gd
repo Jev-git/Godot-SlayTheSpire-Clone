@@ -22,6 +22,8 @@ export var m_psTextBubble: PackedScene
 
 onready var m_vTextureSize: Vector2 = $TextureRect.get_texture().get_size()
 
+signal die(_nSelf)
+
 func _ready():
 	$TextureRect.connect("mouse_entered", self, "_on_mouse_entered")
 	$TextureRect.connect("mouse_exited", self, "_on_mouse_exited")
@@ -74,8 +76,8 @@ func _on_mouse_exited():
 func set_hp(_iHP: int):
 	m_iCurrentHP = _iHP
 	if m_iCurrentHP <= 0:
-		print_debug("DED!!1!")
 		m_nHPLabel.text = ""
+		emit_signal("die", self)
 	else:
 		m_nHPLabel.text = "%s/%s" % [m_iCurrentHP, m_iMaxHP]
 

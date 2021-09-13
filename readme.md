@@ -1,12 +1,10 @@
 # Doing
-* ~~Card energy~~
-    * ~~Add energy column to csv~~
-    * ~~Refactor the function to read card from csv: read next param instead of looking for sepecific param index.~~
-    * ~~Player energy~~
+* ~~Win condition: when all enemies are defeated~~
+* ~~Lose condition: when player HP reaches 0~~
 # Time
 September 2021
-# MVP
-Able to fight with the enemy in a single combat.
+# MVP (done)
+~~Able to fight with the enemy in a single combat.~~
 
 * Per Turn:
     * ~~Able to draw cards~~
@@ -16,11 +14,9 @@ Able to fight with the enemy in a single combat.
     * ~~Skill cards that can provide block to negate damage from attack cards.~~
     * ~~Energy~~
     * ~~Consistant deck:~~
-        * Discard pile
-        * Draw pile
-* Per Combat:
-    * Lose condition
-    * Win condition
+* ~~Per Combat:~~
+    * ~~Lose condition~~
+    * ~~Win condition~~
 
 # Checklist
 Features ordered by neccessity, technical difficulty and the amount of time required.

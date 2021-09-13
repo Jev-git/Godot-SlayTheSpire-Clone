@@ -4,6 +4,8 @@ class_name Enemy
 onready var m_nTurnManager: TurnManager = get_tree().get_nodes_in_group("TurnManager")[0]
 export var m_iDamage: int = 7
 
+signal end_turn
+
 func start_turn():
 	m_nAnimPlayer.play("Enemy Attack")
 	yield(m_nAnimPlayer, "animation_finished")
@@ -13,7 +15,7 @@ func start_turn():
 	if m_nNextEnemy:
 		m_nNextEnemy.start_turn()
 	else:
-		m_nTurnManager.end_enemies_turn()
+		emit_signal("end_turn")
 
 func get_next_enemy() -> Enemy:
 	var bFound: bool = false
