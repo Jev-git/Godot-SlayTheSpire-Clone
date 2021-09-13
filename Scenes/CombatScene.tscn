@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scripts/Enemy.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/EndTurnButton.gd" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Scripts/CardUtil.gd" type="Script" id=7]
 [ext_resource path="res://Scripts/ViewDrawPileButton.gd" type="Script" id=8]
 [ext_resource path="res://Scripts/ViewDiscardPileButton.gd" type="Script" id=9]
+[ext_resource path="res://Scripts/Energy.gd" type="Script" id=10]
 
 [node name="CombatScene" type="Node2D"]
 
@@ -78,6 +79,23 @@ margin_right = 930.0
 margin_bottom = 516.0
 text = "View Discard Pile"
 script = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Energy" type="Node2D" parent="." groups=[
+"Energy",
+]]
+script = ExtResource( 10 )
+
+[node name="Label" type="Label" parent="Energy"]
+margin_left = 80.0
+margin_top = 352.0
+margin_right = 161.0
+margin_bottom = 366.0
+text = "Energy: 3/3"
+align = 1
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }

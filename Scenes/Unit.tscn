@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Scripts/Unit.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
-[ext_resource path="res://Scenes/DamageBubble.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/TextBubble.tscn" type="PackedScene" id=3]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Enemy Attack"
@@ -39,7 +39,7 @@ tracks/0/keys = {
 
 [node name="Unit" type="Node2D"]
 script = ExtResource( 1 )
-m_psDamageBubble = ExtResource( 3 )
+m_psTextBubble = ExtResource( 3 )
 
 [node name="HPLabel" type="RichTextLabel" parent="."]
 margin_left = -24.0

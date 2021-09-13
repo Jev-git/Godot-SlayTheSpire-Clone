@@ -18,7 +18,7 @@ onready var m_nBlockLabel = $BlockLabel
 onready var m_vPositionOffset = Vector2.ZERO
 onready var m_nAnimPlayer = $AnimationPlayer
 
-export var m_psDamageBubble: PackedScene
+export var m_psTextBubble: PackedScene
 
 onready var m_vTextureSize: Vector2 = $TextureRect.get_texture().get_size()
 
@@ -110,6 +110,6 @@ func set_block(_iBlock: int):
 		m_nBlockLabel.text = String(m_iBlock)
 
 func _create_damage_bubble(_iDamage: int, _bIsHPDamage: bool):
-	var nDamageBubble = m_psDamageBubble.instance()
-	nDamageBubble.init(_iDamage, _bIsHPDamage)
-	$DamageBubble.add_child(nDamageBubble)
+	var nTextBubble: TextBubble = m_psTextBubble.instance()
+	nTextBubble.display_damage(_iDamage, _bIsHPDamage)
+	$DamageBubble.add_child(nTextBubble)

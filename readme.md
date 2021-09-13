@@ -1,14 +1,8 @@
 # Doing
-* Consistent deck
-    * ~~Has a set amount of card in deck~~
-    * ~~Has a draw pile~~
-    * ~~Has a discard pile~~
-    * If the drawpile run out during while drawing, transfer the discard pile to draw pile and shuffle.
-        * Bug
-* Card energy
+* ~~Card energy~~
     * ~~Add energy column to csv~~
     * ~~Refactor the function to read card from csv: read next param instead of looking for sepecific param index.~~
-    * Player energy
+    * ~~Player energy~~
 # Time
 September 2021
 # MVP
@@ -20,8 +14,8 @@ Able to fight with the enemy in a single combat.
     * ~~Able to pick and choose target for a card (self, enemy single, enemy all)~~
     * ~~Attack cards that can damage unit's HP~~
     * ~~Skill cards that can provide block to negate damage from attack cards.~~
-    * Energy
-    * Consistant deck:
+    * ~~Energy~~
+    * ~~Consistant deck:~~
         * Discard pile
         * Draw pile
 * Per Combat:

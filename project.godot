@@ -19,15 +19,20 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/CardUtil.gd"
 }, {
-"base": "Node2D",
-"class": "DamageBubble",
-"language": "GDScript",
-"path": "res://Scripts/DamageBubble.gd"
-}, {
 "base": "Unit",
 "class": "Enemy",
 "language": "GDScript",
 "path": "res://Scripts/Enemy.gd"
+}, {
+"base": "Node2D",
+"class": "PlayerEnergy",
+"language": "GDScript",
+"path": "res://Scripts/Energy.gd"
+}, {
+"base": "Node2D",
+"class": "TextBubble",
+"language": "GDScript",
+"path": "res://Scripts/TextBubble.gd"
 }, {
 "base": "Node2D",
 "class": "TurnManager",
@@ -42,8 +47,9 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "Card": "",
 "CardUtil": "",
-"DamageBubble": "",
 "Enemy": "",
+"PlayerEnergy": "",
+"TextBubble": "",
 "TurnManager": "",
 "Unit": ""
 }

@@ -1,8 +1,8 @@
 extends Node2D
 
 export var m_psCard: PackedScene
-export var m_iMaximumCards: int = 10
 onready var m_nCardUtil: CardUtil = get_tree().get_nodes_in_group("CardUtil")[0]
+
 var m_aiDrawPile: Array
 onready var m_aiDiscardPile = []
 var m_oSelectedCard: Card

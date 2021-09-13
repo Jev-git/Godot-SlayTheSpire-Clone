@@ -3,15 +3,18 @@ class_name TurnManager
 
 onready var m_nCards = get_tree().get_nodes_in_group("Cards")[0]
 onready var m_nUnits = get_tree().get_nodes_in_group("Units")[0]
-onready var m_nPlayer = m_nUnits.get_node("Player")
-onready var m_nEnemies = m_nUnits.get_node("Enemies")
+onready var m_nPlayer: Unit = m_nUnits.get_node("Player")
+onready var m_nEnemies: Node2D = m_nUnits.get_node("Enemies")
+onready var m_nPlayerEnergy: PlayerEnergy = get_tree().get_nodes_in_group("Energy")[0]
 
 func _ready():
+	yield(m_nPlayerEnergy, "ready")
 	start_player_turn()
 
 func start_player_turn():
 	m_nPlayer.set_block(0)
 	m_nCards.draw_cards(5)
+	m_nPlayerEnergy.reset_turn()
 
 func end_player_turn():
 	m_nCards.discard_hand()

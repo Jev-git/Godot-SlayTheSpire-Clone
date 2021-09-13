@@ -1,10 +1,12 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scripts/Card.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Cleave.webp" type="Texture" id=2]
+[ext_resource path="res://Scenes/TextBubble.tscn" type="PackedScene" id=3]
 
 [node name="Card" type="Node2D"]
 script = ExtResource( 1 )
+m_psTextBubble = ExtResource( 3 )
 
 [node name="TextureRect" type="TextureRect" parent="."]
 margin_right = 678.0

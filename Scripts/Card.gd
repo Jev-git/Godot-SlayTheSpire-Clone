@@ -22,15 +22,18 @@ var m_iTargetType: int
 var m_iEnergyCost: int
 var m_aiParams = []
 
+export var m_psTextBubble: PackedScene
 var m_sTextureDirPath: String = "res://Assets"
 
-enum STATE {DEFAULT, HOVERING, SELECTING}
-onready var m_iState = STATE.DEFAULT
-onready var m_bIsSelecting = false
 onready var m_nUnits: Node2D = get_tree().get_nodes_in_group("Units")[0]
 onready var m_nPlayer: Unit = m_nUnits.get_node("Player")
 onready var m_nEnemies: Node2D = m_nUnits.get_node("Enemies")
 onready var m_nCards: Node2D = get_tree().get_nodes_in_group("Cards")[0]
+onready var m_nPlayerEnergy: PlayerEnergy = get_tree().get_nodes_in_group("Energy")[0]
+
+enum STATE {DEFAULT, HOVERING, SELECTING}
+onready var m_iState = STATE.DEFAULT
+onready var m_bIsSelecting = false
 onready var m_iHoverOffset: int = 10
 var m_vCardSize: Vector2
 
@@ -89,6 +92,12 @@ func change_state(_iNewState: int):
 				global_position.y += m_iHoverOffset
 				z_index = 0
 			elif _iNewState == STATE.SELECTING: # Select a card
+				if m_iEnergyCost > m_nPlayerEnergy.get_current_energy():
+					var nTextBubble: TextBubble = m_psTextBubble.instance()
+					nTextBubble.display_text("Not enough energy")
+					m_nPlayer.add_child(nTextBubble)
+					return
+				
 				# Deselect all other cards
 				for nCard in m_nCards.get_children():
 					if nCard.m_iState == STATE.SELECTING:
@@ -120,4 +129,5 @@ func on_unit_selected(_nUnit: Node2D):
 	get_parent().send_used_card_to_discard_pile(m_iID)
 	get_parent().set_selected_card(null)
 	_highlight_possible_target(false)
+	m_nPlayerEnergy.use_energy(m_iEnergyCost)
 	queue_free()
