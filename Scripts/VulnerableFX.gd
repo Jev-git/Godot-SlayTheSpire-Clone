@@ -6,6 +6,9 @@ var m_iDuration: int
 
 onready var m_nDurationLabel: Label = $DurationLabel
 
+func get_class() -> String:
+	return "VulnerableFX"
+
 func init(_iDuration: int):
 	m_iDuration = _iDuration
 	if !m_nDurationLabel:

@@ -99,6 +99,9 @@ func take_damage(_iDamage: int):
 	
 	if iDamageToHP > 0:
 		m_nAnimPlayer.play("Shake")
+		for nEffect in m_nEffects.get_children():
+			if nEffect.get_class() == "VulnerableFX":
+				iDamageToHP = nEffect.get_amped_dmg(iDamageToHP)
 		set_hp(m_iCurrentHP - iDamageToHP)
 		yield(get_tree().create_timer(0.1), "timeout")
 		_create_damage_bubble(iDamageToHP, true)
