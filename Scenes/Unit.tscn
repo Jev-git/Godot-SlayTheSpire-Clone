@@ -1,9 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scripts/Unit.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
 [ext_resource path="res://Scenes/TextBubble.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/VulnerableFX.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/WeakFX.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scripts/Effects.gd" type="Script" id=6]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Enemy Attack"
@@ -41,7 +43,6 @@ tracks/0/keys = {
 [node name="Unit" type="Node2D"]
 script = ExtResource( 1 )
 m_psTextBubble = ExtResource( 3 )
-m_psVulnerableFX = ExtResource( 4 )
 
 [node name="HPLabel" type="RichTextLabel" parent="."]
 margin_left = -24.0
@@ -82,3 +83,6 @@ position = Vector2( 32, 32 )
 [node name="Effects" type="Node2D" parent="."]
 position = Vector2( -32, 64 )
 scale = Vector2( 0.15, 0.15 )
+script = ExtResource( 6 )
+m_psVulnerableFX = ExtResource( 4 )
+m_psWeakFX = ExtResource( 5 )

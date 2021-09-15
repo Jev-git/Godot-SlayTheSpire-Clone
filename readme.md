@@ -1,10 +1,7 @@
 # Doing
-* Buff/Debuff that get reduced by 1 each turn
-    * Get new cards
-        * Vulnerable debuff
-            * ~~Apply debuff~~
-            * ~~Debuff duration get reduced after each turn~~
-            * ~~Debuff amplify damage received~~
+* ~~Buff/Debuff that get reduced by 1 each turn~~
+    * Several effects need to be displayed properly
+    * Weak debuff need to lower damage output
 * Buff/Debuff that resist through out a combat
 # Card source (wiki)
 https://slay-the-spire.fandom.com/wiki/Ironclad_Cards

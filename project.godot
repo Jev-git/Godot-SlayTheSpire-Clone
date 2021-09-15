@@ -25,9 +25,14 @@ _global_script_classes=[ {
 "path": "res://Scripts/CombatEndPopup.gd"
 }, {
 "base": "Node2D",
-"class": "Effect",
+"class": "EffectWithDuration",
 "language": "GDScript",
-"path": "res://Scripts/VulnerableFX.gd"
+"path": "res://Scripts/EffectWithDuration.gd"
+}, {
+"base": "Node2D",
+"class": "Effects",
+"language": "GDScript",
+"path": "res://Scripts/Effects.gd"
 }, {
 "base": "Unit",
 "class": "Enemy",
@@ -58,7 +63,8 @@ _global_script_class_icons={
 "Card": "",
 "CardUtil": "",
 "CombatEndPopup": "",
-"Effect": "",
+"EffectWithDuration": "",
+"Effects": "",
 "Enemy": "",
 "PlayerEnergy": "",
 "TextBubble": "",

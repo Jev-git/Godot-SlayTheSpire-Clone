@@ -1,6 +1,7 @@
-ID,Name,Card Type,Target Type,Energy,Attack,Block,Vulnerable
-1,Strike,ATTACK,ENEMY_SINGLE,1,6,0,0
-2,Defend,SKILL,SELF,1,0,5,0
-3,Cleave,ATTACK,ENEMY_ALL,1,8,0,0
-4,IronWave,ATTACK,ENEMY_SINGLE,1,5,5,0
-5,Bash,ATTACK,ENEMY_SINGLE,2,8,0,2
+ID,Name,Card Type,Target Type,Energy,Attack,Block,Vulnerable,Weak
+1,Strike,ATTACK,ENEMY_SINGLE,1,6,0,0,0
+2,Defend,SKILL,SELF,1,0,5,0,0
+3,Cleave,ATTACK,ENEMY_ALL,1,8,0,0,0
+4,IronWave,ATTACK,ENEMY_SINGLE,1,5,5,0,0
+5,Bash,ATTACK,ENEMY_SINGLE,2,8,0,2,0
+6,Clothesline,ATTACK,ENEMY_SINGLE,2,12,0,0,2

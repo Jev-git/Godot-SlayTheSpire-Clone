@@ -23,6 +23,7 @@ var m_iEnergyCost: int
 var m_iAttackValue: int
 var m_iBlockValue: int
 var m_iVulnerableParam: int
+var m_iWeakParam: int
 
 export var m_psTextBubble: PackedScene
 var m_sTextureDirPath: String = "res://Assets/Cards"
@@ -47,7 +48,9 @@ func init(_aCardData: Array):
 	m_iEnergyCost = int(_aCardData.pop_front())
 	m_iAttackValue = int(_aCardData.pop_front())
 	m_iBlockValue = int(_aCardData.pop_front())
+	
 	m_iVulnerableParam = int(_aCardData.pop_front())
+	m_iWeakParam = int(_aCardData.pop_front())
 	
 	$TextureRect.connect("mouse_entered", self, "_on_mouse_entered")
 	$TextureRect.connect("mouse_exited", self, "_on_mouse_exited")
@@ -128,7 +131,8 @@ func on_unit_selected(_nUnit: Node2D):
 				for nEnemy in m_nEnemies.get_children():
 					nEnemy.take_damage(m_iAttackValue)
 			m_nPlayer.gain_block(m_iBlockValue)
-			_nUnit.apply_vulnerable(m_iVulnerableParam)
+			_nUnit.apply_effect(Effects.EFFECT_TYPE.VULNERABLE, m_iVulnerableParam)
+			_nUnit.apply_effect(Effects.EFFECT_TYPE.WEAK, m_iWeakParam)
 		CARD_TYPE.SKILL:
 			m_nPlayer.gain_block(m_iBlockValue)
 	get_parent().send_used_card_to_discard_pile(m_iID)
