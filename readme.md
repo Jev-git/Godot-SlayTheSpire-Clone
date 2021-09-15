@@ -3,7 +3,7 @@
     * Get new cards
         * Vulnerable debuff
             * ~~Apply debuff~~
-            * Debuff duration get reduced after each turn
+            * ~~Debuff duration get reduced after each turn~~
             * Debuff amplify damage received
 * Buff/Debuff that resist through out a combat
 # Card source (wiki)

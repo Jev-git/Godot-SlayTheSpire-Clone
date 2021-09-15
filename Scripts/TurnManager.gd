@@ -25,6 +25,7 @@ func _start_player_turn():
 func _end_player_turn():
 	m_nCards.discard_hand()
 	m_nCards.set_selected_card(null)
+	m_nPlayer.reduce_effect_duration()
 	
 	m_nPlayer.set_highlight(false)
 	for nEnemy in m_nEnemies.get_children():
@@ -41,5 +42,8 @@ func _start_enemies_turn():
 func _end_enemies_turn():
 	for nUIButton in m_anUIButtons:
 		nUIButton.visible = true
+	
+	for nEnemy in m_nEnemies.get_children():
+		nEnemy.reduce_effect_duration()
 	
 	_start_player_turn()

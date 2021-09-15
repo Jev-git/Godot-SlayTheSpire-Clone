@@ -1,4 +1,5 @@
 extends Node2D
+class_name Effect
 
 export var m_fDmgAmp: float = 0.5
 var m_iDuration: int
@@ -14,7 +15,7 @@ func init(_iDuration: int):
 func get_amped_dmg(iDmg: int) -> int:
 	return int((1 + m_fDmgAmp) * iDmg)
 
-func on_turn_end():
+func reduce_duration_by_one():
 	m_iDuration -= 1
 	if m_iDuration == 0:
 		queue_free()
