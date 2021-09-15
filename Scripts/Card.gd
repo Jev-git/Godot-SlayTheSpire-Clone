@@ -20,7 +20,9 @@ var m_tTexture: Texture
 var m_iCardType: int
 var m_iTargetType: int
 var m_iEnergyCost: int
-var m_aiParams = []
+var m_iAttackValue: int
+var m_iBlockValue: int
+var m_iVulnerableParam: int
 
 export var m_psTextBubble: PackedScene
 var m_sTextureDirPath: String = "res://Assets/Cards"
@@ -43,8 +45,9 @@ func init(_aCardData: Array):
 	m_iCardType = CARD_TYPE_DICT[_aCardData.pop_front()]
 	m_iTargetType = TARGET_TYPE_DICT[_aCardData.pop_front()]
 	m_iEnergyCost = int(_aCardData.pop_front())
-	while(_aCardData.size() > 0):
-		m_aiParams.append(int(_aCardData.pop_front()))
+	m_iAttackValue = int(_aCardData.pop_front())
+	m_iBlockValue = int(_aCardData.pop_front())
+	m_iVulnerableParam = int(_aCardData.pop_front())
 	
 	$TextureRect.connect("mouse_entered", self, "_on_mouse_entered")
 	$TextureRect.connect("mouse_exited", self, "_on_mouse_exited")
@@ -120,14 +123,14 @@ func on_unit_selected(_nUnit: Node2D):
 	match m_iCardType:
 		CARD_TYPE.ATTACK:
 			if m_iTargetType == TARGET_TYPE.ENEMY_SINGLE:
-				_nUnit.take_damage(m_aiParams[0])
+				_nUnit.take_damage(m_iAttackValue)
 			else:
 				for nEnemy in m_nEnemies.get_children():
-					nEnemy.take_damage(m_aiParams[0])
-			m_nPlayer.gain_block(m_aiParams[1])
-			_nUnit.apply_vulnerable(m_aiParams[2])
+					nEnemy.take_damage(m_iAttackValue)
+			m_nPlayer.gain_block(m_iBlockValue)
+			_nUnit.apply_vulnerable(m_iVulnerableParam)
 		CARD_TYPE.SKILL:
-			m_nPlayer.gain_block(m_aiParams[0])
+			m_nPlayer.gain_block(m_iBlockValue)
 	get_parent().send_used_card_to_discard_pile(m_iID)
 	get_parent().set_selected_card(null)
 	_highlight_possible_target(false)
