@@ -4,7 +4,7 @@
         * Vulnerable debuff
             * ~~Apply debuff~~
             * ~~Debuff duration get reduced after each turn~~
-            * Debuff amplify damage received
+            * ~~Debuff amplify damage received~~
 * Buff/Debuff that resist through out a combat
 # Card source (wiki)
 https://slay-the-spire.fandom.com/wiki/Ironclad_Cards
