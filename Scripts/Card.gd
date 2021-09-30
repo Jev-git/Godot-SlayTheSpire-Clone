@@ -16,17 +16,12 @@ var CARD_TYPE_DICT = {
 
 # Card params
 onready var m_iID: int
-var m_tTexture: Texture
 var m_iCardType: int
 var m_iTargetType: int
 var m_iEnergyCost: int
-var m_iAttackValue: int
-var m_iBlockValue: int
-var m_iVulnerableParam: int
-var m_iWeakParam: int
+var m_aiCardParams = []
 
 export var m_psTextBubble: PackedScene
-var m_sTextureDirPath: String = "res://Assets/Cards"
 
 onready var m_nUnits: Node2D = get_tree().get_nodes_in_group("Units")[0]
 onready var m_nPlayer: Unit = m_nUnits.get_node("Player")
@@ -40,17 +35,18 @@ onready var m_bIsSelecting = false
 onready var m_iHoverOffset: int = 10
 var m_vCardSize: Vector2
 
+signal selected(_nSelf)
+signal discard(_iID)
+
 func init(_aCardData: Array):
 	m_iID = int(_aCardData.pop_front())
-	$TextureRect.texture = load("%s/%s.webp" % [m_sTextureDirPath, _aCardData.pop_front()])
+	$TextureRect.texture = load("res://Assets/Cards/%s.webp" % _aCardData.pop_front())
 	m_iCardType = CARD_TYPE_DICT[_aCardData.pop_front()]
 	m_iTargetType = TARGET_TYPE_DICT[_aCardData.pop_front()]
 	m_iEnergyCost = int(_aCardData.pop_front())
-	m_iAttackValue = int(_aCardData.pop_front())
-	m_iBlockValue = int(_aCardData.pop_front())
 	
-	m_iVulnerableParam = int(_aCardData.pop_front())
-	m_iWeakParam = int(_aCardData.pop_front())
+	while (_aCardData.size() > 0):
+		m_aiCardParams.append(int(_aCardData.pop_front()))
 	
 	$TextureRect.connect("mouse_entered", self, "_on_mouse_entered")
 	$TextureRect.connect("mouse_exited", self, "_on_mouse_exited")
@@ -111,7 +107,7 @@ func change_state(_iNewState: int):
 						nCard.change_state(STATE.DEFAULT)
 						break
 				
-				get_parent().set_selected_card(self)
+				emit_signal("selected", self)
 				m_bIsSelecting = true
 				_highlight_possible_target(true)
 		STATE.SELECTING:
@@ -126,17 +122,21 @@ func on_unit_selected(_nUnit: Node2D):
 	match m_iCardType:
 		CARD_TYPE.ATTACK:
 			if m_iTargetType == TARGET_TYPE.ENEMY_SINGLE:
-				_nUnit.take_damage(m_iAttackValue)
+				m_nPlayer.deal_damage(m_aiCardParams[0], _nUnit)
 			else:
 				for nEnemy in m_nEnemies.get_children():
-					nEnemy.take_damage(m_iAttackValue)
-			m_nPlayer.gain_block(m_iBlockValue)
-			_nUnit.apply_effect(Effects.EFFECT_TYPE.VULNERABLE, m_iVulnerableParam)
-			_nUnit.apply_effect(Effects.EFFECT_TYPE.WEAK, m_iWeakParam)
+					m_nPlayer.deal_damage(m_aiCardParams[0], nEnemy)
+			m_nPlayer.gain_block(m_aiCardParams[1])
+			_nUnit.apply_effect(UnitEffectUtil.EFFECT_TYPES.VULNERABLE, m_aiCardParams[2])
+			_nUnit.apply_effect(UnitEffectUtil.EFFECT_TYPES.WEAK, m_aiCardParams[3])
+			emit_signal("discard", m_iID)
 		CARD_TYPE.SKILL:
-			m_nPlayer.gain_block(m_iBlockValue)
-	get_parent().send_used_card_to_discard_pile(m_iID)
-	get_parent().set_selected_card(null)
+			m_nPlayer.gain_block(m_aiCardParams[0])
+			emit_signal("discard", m_iID)
+		CARD_TYPE.POWER:
+			m_nPlayer.apply_effect(UnitEffectUtil.EFFECT_TYPES.STRENGTH, m_aiCardParams[0])
+			m_nPlayer.apply_effect(UnitEffectUtil.EFFECT_TYPES.METALLICIZE, m_aiCardParams[1])
+	emit_signal("selected", null)
 	_highlight_possible_target(false)
 	m_nPlayerEnergy.use_energy(m_iEnergyCost)
 	queue_free()

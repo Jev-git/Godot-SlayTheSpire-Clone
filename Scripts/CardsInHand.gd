@@ -1,15 +1,20 @@
 extends Node2D
 
 export var m_psCard: PackedScene
-onready var m_nCardUtil: CardUtil = get_tree().get_nodes_in_group("CardUtil")[0]
-
 var m_aiDrawPile: Array
 onready var m_aiDiscardPile = []
 var m_oSelectedCard: Card
 
-func _ready():
-	m_aiDrawPile = m_nCardUtil.get_initial_deck()
+onready var m_nUnits: Node2D = get_tree().get_nodes_in_group("Units")[0]
+onready var m_nPlayer: Unit = m_nUnits.get_node("Player")
+onready var m_nEnemies: Node2D = m_nUnits.get_node("Enemies")
+
+func init():
+	m_aiDrawPile = CardUtil.get_deck()
 	m_aiDrawPile.shuffle()
+	m_nPlayer.connect("selected", self, "_on_unit_selected")
+	for nEnemy in m_nEnemies.get_children():
+		nEnemy.connect("selected", self, "_on_unit_selected")
 
 func draw_cards(_iAmount: int):
 	var iCardsToDraw: int = _iAmount
@@ -21,7 +26,9 @@ func draw_cards(_iAmount: int):
 		
 	for i in range(get_child_count(), get_child_count() + iCardsToDraw):
 		var nCard: Card = m_psCard.instance()
-		nCard.init(m_nCardUtil.get_card_data_with_id(m_aiDrawPile.pop_front()))
+		nCard.init(CardUtil.get_card_data_with_id(m_aiDrawPile.pop_front()))
+		nCard.connect("selected", self, "set_selected_card")
+		nCard.connect("discard", self, "_discard_card")
 		add_child(nCard)
 		nCard.position.x = i * nCard.m_vCardSize.x * 0.6
 	
@@ -29,7 +36,7 @@ func draw_cards(_iAmount: int):
 		move_discard_pile_to_draw_pile()
 		draw_cards(iExtraCardsToDraw)
 
-func send_used_card_to_discard_pile(_iID: int):
+func _discard_card(_iID: int):
 	m_aiDiscardPile.append(_iID)
 
 func discard_hand():
@@ -45,6 +52,6 @@ func move_discard_pile_to_draw_pile():
 func set_selected_card(_oCard: Card):
 	m_oSelectedCard = _oCard
 
-func on_unit_selected(_nUnit: Node2D):
+func _on_unit_selected(_nUnit: Unit):
 	if m_oSelectedCard:
 		m_oSelectedCard.on_unit_selected((_nUnit))

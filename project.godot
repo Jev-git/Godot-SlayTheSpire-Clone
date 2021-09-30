@@ -15,9 +15,14 @@ _global_script_classes=[ {
 "path": "res://Scripts/Card.gd"
 }, {
 "base": "Node2D",
-"class": "CardUtil",
+"class": "CardReward",
 "language": "GDScript",
-"path": "res://Scripts/CardUtil.gd"
+"path": "res://Scripts/CardReward.gd"
+}, {
+"base": "Node2D",
+"class": "CardRewardPopup",
+"language": "GDScript",
+"path": "res://Scripts/CardRewardPopup.gd"
 }, {
 "base": "Node2D",
 "class": "CombatEndPopup",
@@ -39,44 +44,87 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/Enemy.gd"
 }, {
+"base": "UnitEffect",
+"class": "MetallicizeFX",
+"language": "GDScript",
+"path": "res://Scripts/UnitEffects/MetallicizeFX.gd"
+}, {
+"base": "Unit",
+"class": "Player",
+"language": "GDScript",
+"path": "res://Scripts/Player.gd"
+}, {
 "base": "Node2D",
 "class": "PlayerEnergy",
 "language": "GDScript",
 "path": "res://Scripts/Energy.gd"
 }, {
+"base": "UnitEffect",
+"class": "StrengthFX",
+"language": "GDScript",
+"path": "res://Scripts/UnitEffects/StrengthFX.gd"
+}, {
 "base": "Node2D",
 "class": "TextBubble",
 "language": "GDScript",
-"path": "res://Scripts/TextBubble.gd"
+"path": "res://Scripts/Utils/TextBubble.gd"
 }, {
 "base": "Node2D",
 "class": "TurnManager",
 "language": "GDScript",
-"path": "res://Scripts/TurnManager.gd"
+"path": "res://Scripts/Utils/TurnManager.gd"
 }, {
 "base": "Node2D",
 "class": "Unit",
 "language": "GDScript",
 "path": "res://Scripts/Unit.gd"
+}, {
+"base": "Node2D",
+"class": "UnitEffect",
+"language": "GDScript",
+"path": "res://Scripts/UnitEffects/UnitEffect.gd"
+}, {
+"base": "UnitEffect",
+"class": "VulnerableFX",
+"language": "GDScript",
+"path": "res://Scripts/UnitEffects/VulnerableFX.gd"
+}, {
+"base": "UnitEffect",
+"class": "WeakFX",
+"language": "GDScript",
+"path": "res://Scripts/UnitEffects/WeakFX.gd"
 } ]
 _global_script_class_icons={
 "Card": "",
-"CardUtil": "",
+"CardReward": "",
+"CardRewardPopup": "",
 "CombatEndPopup": "",
 "EffectWithDuration": "",
 "Effects": "",
 "Enemy": "",
+"MetallicizeFX": "",
+"Player": "",
 "PlayerEnergy": "",
+"StrengthFX": "",
 "TextBubble": "",
 "TurnManager": "",
-"Unit": ""
+"Unit": "",
+"UnitEffect": "",
+"VulnerableFX": "",
+"WeakFX": ""
 }
 
 [application]
 
 config/name="Slay The Spire Clone"
-run/main_scene="res://Scenes/CombatScene.tscn"
+run/main_scene="res://Scenes/Map.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+UnitEffectUtil="*res://Scripts/UnitEffects/UnitEffectUtil.gd"
+CardUtil="*res://Scripts/Utils/CardUtil.gd"
+PersistantData="*res://Scripts/Utils/PersistantData.gd"
 
 [display]
 
@@ -85,6 +133,11 @@ window/size/height=540
 window/size/resizable=false
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
+
+[global]
+
+scene\=false
+scene=false
 
 [importer_defaults]
 

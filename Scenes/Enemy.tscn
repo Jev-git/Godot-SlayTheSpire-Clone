@@ -1,0 +1,85 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Scripts/Enemy.gd" type="Script" id=1]
+[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/TextBubble.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scripts/Effects.gd" type="Script" id=6]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Enemy Attack"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("TextureRect:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -32, -32 ), Vector2( 0, -32 ), Vector2( -32, -32 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("TextureRect:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -32, -32 ), Vector2( -40, -32 ), Vector2( -32, -32 ), Vector2( -24, -32 ), Vector2( -32, -32 ) ]
+}
+
+[node name="Enemy" type="Node2D"]
+script = ExtResource( 1 )
+m_iMaxHP = 1
+m_psTextBubble = ExtResource( 3 )
+
+[node name="HPLabel" type="RichTextLabel" parent="."]
+margin_left = -24.0
+margin_top = 40.0
+margin_right = 16.0
+margin_bottom = 80.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BlockLabel" type="RichTextLabel" parent="."]
+margin_left = 16.0
+margin_top = 48.0
+margin_right = 56.0
+margin_bottom = 88.0
+custom_colors/default_color = Color( 0, 0.811765, 1, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_left = -32.0
+margin_top = -32.0
+margin_right = 32.0
+margin_bottom = 32.0
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+"anims/Enemy Attack" = SubResource( 1 )
+anims/Shake = SubResource( 2 )
+
+[node name="DamageBubble" type="Position2D" parent="."]
+position = Vector2( 32, 32 )
+
+[node name="Effects" type="Node2D" parent="."]
+position = Vector2( -32, 64 )
+scale = Vector2( 0.15, 0.15 )
+script = ExtResource( 6 )

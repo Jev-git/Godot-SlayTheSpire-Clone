@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Assets/Effects/Metallicize.webp" type="Texture" id=1]
+[ext_resource path="res://Scripts/UnitEffects/MetallicizeFX.gd" type="Script" id=2]
+
+[node name="MetallicizeFX" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+centered = false
+
+[node name="Label" type="Label" parent="."]
+margin_left = -128.0
+margin_right = -113.0
+margin_bottom = 14.0
+rect_scale = Vector2( 8.6516, 8.6516 )
+text = "2"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}

@@ -1,22 +1,17 @@
 [gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://Scripts/Enemy.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/CardRewardPopup.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scripts/CardsInHand.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/Card.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Scripts/TurnManager.gd" type="Script" id=5]
-[ext_resource path="res://Scenes/Unit.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Scripts/CardUtil.gd" type="Script" id=7]
-[ext_resource path="res://Scripts/ViewDrawPileButton.gd" type="Script" id=8]
-[ext_resource path="res://Scripts/ViewDiscardPileButton.gd" type="Script" id=9]
+[ext_resource path="res://Scripts/Utils/TurnManager.gd" type="Script" id=5]
+[ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scripts/Utils/ViewDrawPileButton.gd" type="Script" id=8]
+[ext_resource path="res://Scripts/Utils/ViewDiscardPileButton.gd" type="Script" id=9]
 [ext_resource path="res://Scripts/Energy.gd" type="Script" id=10]
-[ext_resource path="res://Scripts/CombatEndPopup.gd" type="Script" id=11]
+[ext_resource path="res://Scripts/Utils/GameOverPopup.gd" type="Script" id=11]
+[ext_resource path="res://Scenes/Enemy.tscn" type="PackedScene" id=12]
 
 [node name="CombatScene" type="Node2D"]
-
-[node name="CardUtil" type="Node2D" parent="." groups=[
-"CardUtil",
-]]
-script = ExtResource( 7 )
 
 [node name="CardsInHand" type="Node2D" parent="." groups=[
 "Cards",
@@ -33,24 +28,16 @@ position = Vector2( 0, 192 )
 
 [node name="Player" parent="Units" instance=ExtResource( 6 )]
 position = Vector2( 128, 0 )
-m_iMaxHP = 70
+m_iMaxHP = 10
 
 [node name="Enemies" type="Node2D" parent="Units"]
-position = Vector2( 704, 0 )
-
-[node name="Enemy1" parent="Units/Enemies" instance=ExtResource( 6 )]
-script = ExtResource( 1 )
-m_iMaxHP = 30
-
-[node name="Enemy2" parent="Units/Enemies" instance=ExtResource( 6 )]
-position = Vector2( 128, 0 )
-script = ExtResource( 1 )
-m_iMaxHP = 30
+position = Vector2( 560, 0 )
 
 [node name="TurnManager" type="Node2D" parent="." groups=[
 "TurnManager",
 ]]
 script = ExtResource( 5 )
+m_psEnemy = ExtResource( 12 )
 
 [node name="EndTurnButton" type="Button" parent="." groups=[
 "EndTurnButton",
@@ -108,12 +95,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CombatEndPopup" type="Node2D" parent="."]
+[node name="GameOverPopup" type="Node2D" parent="."]
 pause_mode = 2
 script = ExtResource( 11 )
 
-[node name="AcceptDialog" type="AcceptDialog" parent="CombatEndPopup"]
+[node name="AcceptDialog" type="AcceptDialog" parent="GameOverPopup"]
 margin_right = 83.0
 margin_bottom = 58.0
 window_title = ""
 dialog_text = "Replay?"
+
+[node name="CardRewardPopup" parent="." instance=ExtResource( 2 )]
+visible = false

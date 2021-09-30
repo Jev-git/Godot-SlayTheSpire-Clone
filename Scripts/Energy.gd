@@ -1,7 +1,7 @@
 extends Node2D
 class_name PlayerEnergy
 
-onready var m_iMaxEnergy: int = 3
+export var m_iMaxEnergy: int = 3
 var m_iCurrentEnergy: int
 onready var m_nLabel: Label = $Label
 

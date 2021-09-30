@@ -9,7 +9,7 @@ signal end_turn
 func start_turn():
 	m_nAnimPlayer.play("Enemy Attack")
 	yield(m_nAnimPlayer, "animation_finished")
-	m_nPlayer.take_damage(m_iDamage)
+	deal_damage(m_iDamage, m_nPlayer)
 	yield(get_tree().create_timer(0.5), "timeout")
 	var m_nNextEnemy: Enemy = get_next_enemy()
 	if m_nNextEnemy:

@@ -7,7 +7,6 @@ onready var m_bHighlightAllEnemies: bool = false
 onready var m_nUnits: Node2D = get_tree().get_nodes_in_group("Units")[0]
 onready var m_nPlayer: Unit = m_nUnits.get_node("Player")
 onready var m_nEnemies: Node2D = m_nUnits.get_node("Enemies")
-onready var m_nCardsInHand: Node2D = get_tree().get_nodes_in_group("Cards")[0]
 
 export var m_iMaxHP: int = 70
 onready var m_iCurrentHP: int
@@ -24,6 +23,7 @@ onready var m_vTextureSize: Vector2 = $TextureRect.get_texture().get_size()
 
 onready var m_nEffects: Node2D = $Effects
 
+signal selected(_nSelf)
 signal die(_nSelf)
 
 func _ready():
@@ -45,7 +45,7 @@ func _draw():
 func _input(event):
 	if event is InputEventMouse:
 		if m_iState == STATE.HOVERING and event.is_pressed() and event.get_button_mask() == BUTTON_LEFT:
-			m_nCardsInHand.on_unit_selected(self)
+			emit_signal("selected", self)
 
 func set_highlight(_bIsHighlighting: bool, _bHighlightAllEnemies: bool = false):
 	m_bHighlightAllEnemies = _bHighlightAllEnemies
@@ -84,9 +84,9 @@ func set_hp(_iHP: int):
 		m_nHPLabel.text = "%s/%s" % [m_iCurrentHP, m_iMaxHP]
 
 func take_damage(_iDamage: int):
-	for nEffect in m_nEffects.get_children():
-		if nEffect.get_class() == "VulnerableFX":
-			_iDamage = nEffect.get_amped_dmg(_iDamage)
+	var nVulnerableFX: VulnerableFX = get_effect(UnitEffectUtil.EFFECT_TYPES.VULNERABLE)
+	if nVulnerableFX:
+		_iDamage = nVulnerableFX.get_amped_dmg(_iDamage)
 	
 	var iDamageToHP: int = _iDamage
 	
@@ -105,6 +105,21 @@ func take_damage(_iDamage: int):
 		set_hp(m_iCurrentHP - iDamageToHP)
 		yield(get_tree().create_timer(0.1), "timeout")
 		_create_damage_bubble(iDamageToHP, true)
+
+func deal_damage(_iDamage: int, _nTarget: Unit):
+	var nStrenghFX: StrengthFX = get_effect(UnitEffectUtil.EFFECT_TYPES.STRENGTH)
+	var nWeakFX: WeakFX = get_effect(UnitEffectUtil.EFFECT_TYPES.WEAK)
+	if nStrenghFX:
+		_iDamage = nStrenghFX.get_amped_dmg(_iDamage)
+	if nWeakFX:
+		_iDamage = nWeakFX.get_weaken_dmg(_iDamage)
+	_nTarget.take_damage(_iDamage)
+
+func get_effect(_iEffectType: int) -> UnitEffect:
+	for nEffect in m_nEffects.get_children():
+		if nEffect.get_effect_type() == _iEffectType:
+			return nEffect
+	return null
 
 func gain_block(_iBlock: int):
 	set_block(m_iBlock + _iBlock)
